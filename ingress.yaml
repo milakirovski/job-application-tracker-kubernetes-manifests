@@ -1,30 +1,12 @@
-# 1. Traefik Middleware to strip the /api prefix
-# This removes "/api" from the request before forwarding it to the backend
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: strip-api-prefix
-  namespace: job-tracker
-spec:
-  stripPrefix:
-    prefixes:
-      - /api
-
----
-# 2. The Updated Ingress Manifest
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: job-tracker-ingress
   namespace: job-tracker
-  annotations:
-    # Tell Traefik to use the middleware we just defined
-    traefik.ingress.kubernetes.io/router.middlewares: job-tracker-strip-api-prefix@kubernetescrd
 spec:
   rules:
     - http:
         paths:
-          # IMPORTANT: More specific paths must come first
           - path: /api
             pathType: Prefix
             backend:
