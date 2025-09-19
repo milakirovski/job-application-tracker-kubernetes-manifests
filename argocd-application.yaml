@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: job-tracker-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/milakirovski/job-application-tracker-kubernetes-manifests'
+    targetRevision: HEAD
+    path: .
+  destination:
+    server: 'https://kubernetes.default.svc' # the local cluster
+    namespace: job-tracker
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
