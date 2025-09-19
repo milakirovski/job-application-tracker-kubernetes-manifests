@@ -13,6 +13,8 @@ spec:
       labels:
         app: backend
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3d-job-tracker-agent-0 # force the backend on the agent node
       containers:
         - name: backend
           # IMPORTANT: We use a placeholder image tag that our pipeline will replace.
