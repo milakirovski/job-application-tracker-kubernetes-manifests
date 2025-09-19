@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: job-tracker-ingress
   namespace: job-tracker
+  # This annotation block is crucial for the API calls to work
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - http:
@@ -14,10 +17,12 @@ spec:
                 name: frontend-service
                 port:
                   number: 80
-          - path: /api
+          # uses a regex to capture the API route
+          - path: /api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: backend-service
                 port:
                   number: 8080
+
