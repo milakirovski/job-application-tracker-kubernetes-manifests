@@ -16,7 +16,7 @@ spec:
       containers:
         - name: frontend
           # IMPORTANT: We use a placeholder image tag that our pipeline will replace.
-          image: milakirovski/job-tracker-frontend:8
+          image: milakirovski/job-tracker-frontend:9
           ports:
             - containerPort: 80
 ---
