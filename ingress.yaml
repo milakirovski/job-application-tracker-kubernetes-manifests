@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: job-tracker-ingress
-  namespace: job-tracker
+  namespace: job-tracker-app
 spec:
   rules:
     - http:
