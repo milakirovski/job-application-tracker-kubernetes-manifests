@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/milakirovski/job-application-tracker-kubernetes-manifests'
-    targetRevision: HEAD
+    repoURL: https://github.com/milakirovski/job-application-tracker-kubernetes-manifests.git
+    targetRevision: master
     path: .
   destination:
     server: 'https://kubernetes.default.svc' # the local cluster
