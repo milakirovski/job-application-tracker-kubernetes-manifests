@@ -13,7 +13,7 @@ spec:
               service:
                 name: backend-service
                 port:
-                  number: 8080
+                  number: 81
           - path: /
             pathType: Prefix
             backend:
