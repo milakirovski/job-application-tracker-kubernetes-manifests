@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb
-  namespace: job-tracker
+  name: mongodb-statefulset
+  namespace: job-tracker-app
 spec:
-  serviceName: "mongodb-service"
+  serviceName: mongodb-service
   replicas: 1
   selector:
     matchLabels:
@@ -33,13 +33,27 @@ spec:
                   name: mongodb-secret
                   key: mongo-root-password
           volumeMounts:
-            - name: mongodb-secret
+            - name: mongodb-storage
               mountPath: /data/db
   volumeClaimTemplates:
     - metadata:
-        name: mongo-data
+        name: mongodb-storage
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
             storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: job-tracker-app
+spec:
+  clusterIP: None
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

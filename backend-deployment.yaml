@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  namespace: job-tracker
+  namespace: job-tracker-app
 spec:
   replicas: 1
   selector:
@@ -13,8 +13,6 @@ spec:
       labels:
         app: backend
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: k3d-job-tracker-agent-0 # force the backend on the agent node
       containers:
         - name: backend
           # IMPORTANT: We use a placeholder image tag that our pipeline will replace.
@@ -22,8 +20,6 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://$(mongo-root-username):$(mongo-root-password)@mongodb-0.mongodb-service/job-tracker-db?authSource=admin"
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -34,16 +30,19 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: SPRING_DATA_MONGODB_URI
+              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@mongodb:27017/job-tracker-db?authSource=admin"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
-  namespace: job-tracker
+  namespace: job-tracker-app
 spec:
   selector:
     app: backend
+  type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 80 # service port
+      targetPort: 8080 # backend application listening port
