@@ -4,6 +4,7 @@ metadata:
   name: job-tracker-ingress
   namespace: job-tracker-app
 spec:
+  ingressClassName: traefik
   rules:
     - http:
         paths:
