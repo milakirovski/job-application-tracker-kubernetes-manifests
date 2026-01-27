@@ -44,5 +44,5 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 81 # service port
+      port: 8080 # service port
       targetPort: 8080 # backend application listening port
