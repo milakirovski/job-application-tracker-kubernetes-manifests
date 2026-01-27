@@ -4,8 +4,9 @@ metadata:
   name: job-tracker-ingress
   namespace: job-tracker-app
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
+    - host: 192.168.49.2
     - http:
         paths:
           - path: /
