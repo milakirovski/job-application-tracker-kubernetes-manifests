@@ -26,9 +26,9 @@ metadata:
   name: frontend-service
   namespace: job-tracker-app
 spec:
+  type: ClusterIP
   selector:
     app: frontend
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 80
