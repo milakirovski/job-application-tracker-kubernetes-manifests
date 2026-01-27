@@ -16,7 +16,7 @@ spec:
       containers:
         - name: backend
           # IMPORTANT: We use a placeholder image tag that our pipeline will replace.
-          image: milakirovski/job-tracker-backend:12
+          image: milakirovski/job-tracker-backend:15
           ports:
             - containerPort: 8080
           env:
@@ -31,7 +31,7 @@ spec:
                   name: mongodb-secret
                   key: mongo-root-password
             - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@mongodb:27017/job-tracker-db?authSource=admin"
+              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@mongodb-service:27017/job-tracker-db?authSource=admin"
 ---
 apiVersion: v1
 kind: Service
