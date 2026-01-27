@@ -39,10 +39,9 @@ metadata:
   name: backend-service
   namespace: job-tracker-app
 spec:
+  type: ClusterIP
   selector:
     app: backend
-  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 8080 # service port
+    - port: 8080 # service port
       targetPort: 8080 # backend application listening port
