@@ -30,6 +30,37 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+
+            - name: SPRING_APPLICATION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: application-name
+                  key: SPRING_APPLICATION_NAME
+
+            - name: SPRING_DATA_MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-host
+                  key: SPRING_DATA_MONGODB_HOST
+
+            - name: SPRING_DATA_MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-port
+                  key: SPRING_DATA_MONGODB_PORT
+
+            - name: SPRING_DATA_MONGODB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-name
+                  key: SPRING_DATA_MONGODB_DATABASE
+
+            - name: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-auth
+                  key: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
+
             - name: SPRING_DATA_MONGODB_URI
               value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@$(SPRING_DATA_MONGODB_HOST):$(SPRING_DATA_MONGODB_PORT)/$(SPRING_DATA_MONGODB_DATABASE)?authSource=$(SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE)"
 
