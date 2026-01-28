@@ -34,31 +34,31 @@ spec:
             - name: SPRING_APPLICATION_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: application-name
+                  name: backend-config
                   key: SPRING_APPLICATION_NAME
 
             - name: SPRING_DATA_MONGODB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: mongodb-host
+                  name: backend-config
                   key: SPRING_DATA_MONGODB_HOST
 
             - name: SPRING_DATA_MONGODB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: mongodb-port
+                  name: backend-config
                   key: SPRING_DATA_MONGODB_PORT
 
             - name: SPRING_DATA_MONGODB_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: mongodb-name
+                  name: backend-config
                   key: SPRING_DATA_MONGODB_DATABASE
 
             - name: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: mongodb-auth
+                  name: backend-config
                   key: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
 
             - name: SPRING_DATA_MONGODB_URI
